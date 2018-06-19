@@ -14,23 +14,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val alert = AlertDialog.Builder(this)
         val shopName = findViewById<TextView>(R.id.shop_name)
+
         shopName.setOnClickListener{
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("set shop name")
+            alert.setMessage("or cancel it")
+
+            val name = EditText(this)
+            name.setText(shopName.text)
+            alert.setView(name)
+
+            alert.setPositiveButton("save") { dialog, whichButton -> shopName.text = name.text.toString() }
+            alert.setNegativeButton("cancel") { dialog, whichButton ->}
             alert.show()
         }
-
-        alert.setTitle("Input your name")
-        alert.setMessage("Plz, input your name")
-
-        val name = EditText(this)
-        alert.setView(name)
-
-        alert.setPositiveButton("ok") { dialog, whichButton -> shopName.text = name.text }
-        alert.setNegativeButton("no") { dialog, whichButton -> }
-
-
-
-
     }
 }

@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.math.BigDecimal
+import java.math.BigInteger
 
 class server_edit : AppCompatActivity() {
 
@@ -23,14 +25,13 @@ class server_edit : AppCompatActivity() {
             val alert = AlertDialog.Builder(this)
             alert.setTitle("추가할 메뉴의 정보를 입력해주세요")
             alert.setMessage("입력한 뒤 추가를 눌러주세요")
-
             val dialogView = layoutInflater.inflate(R.layout.dialog_insert_menu, null)
             val name = dialogView.findViewById<EditText>(R.id.input_menu_name)
             val price = dialogView.findViewById<EditText>(R.id.input_menu_price)
             alert.setView(dialogView)
 
             alert.setPositiveButton("추가") { dialog, whichButton ->
-                val MenuData = MenuData(name.text.toString(),price.text.toString().toInt())
+                val MenuData = MenuData(name.text.toString(),BigInteger(price.text.toString()))
                 MenuList.AddMenu(MenuData)
                 Toast.makeText(this,"현재 길이 :"+MenuList.Length(),Toast.LENGTH_LONG).show()
             }

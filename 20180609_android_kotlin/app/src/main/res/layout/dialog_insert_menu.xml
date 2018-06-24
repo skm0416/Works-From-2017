@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:hint="가격을 입력해주세요"
             android:id="@+id/input_menu_price"
-            android:maxLength="10"
+            android:maxLength="9"
             android:inputType="numberDecimal"
             android:textSize="15sp"
             android:layout_height="60dp" />

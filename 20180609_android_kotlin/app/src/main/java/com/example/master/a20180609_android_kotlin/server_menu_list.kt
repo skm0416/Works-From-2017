@@ -54,22 +54,21 @@ class server_menu_list : AppCompatActivity() {
                 values.put("TabName", "기본탭")
                 values.put("MenuName", menu_name.text.toString())
                 values.put("Price", price.text.toString().toInt())
-                var response = DB.InsertMenu(values);
+                var response = DB.InsertMenu(values)
                 if(response=="ok") {
 
-                    Toast.makeText(this, "메뉴추가 성공",
-                            Toast.LENGTH_SHORT).show()
-
-                    /*var intent = Intent(this, server_menu_list::class.java)
-                    startActivity(intent)
-                    finish()*/
+                    Toast.makeText(this, "메뉴추가 성공", Toast.LENGTH_SHORT).show()
 
                 }else{
                     Toast.makeText(this, "메뉴추가 실패",
                             Toast.LENGTH_SHORT).show()
                 }
             }
-            alert.setNegativeButton("취소") { dialog, whichButton ->}
+            alert.setNegativeButton("취소") { dialog, whichButton ->
+                val DB = DatabaseHelper(this)
+                var response = DB.RemoveAll()
+                Toast.makeText(this, response.toString() + "개의 메뉴를 삭제했습니다", Toast.LENGTH_SHORT).show()
+            }
             alert.show()
         }
     }

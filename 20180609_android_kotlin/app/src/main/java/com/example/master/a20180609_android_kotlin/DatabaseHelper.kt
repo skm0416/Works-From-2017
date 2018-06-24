@@ -55,6 +55,10 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
         }
     }
 
+    fun RemoveAll() : Int {
+        return sqlObj!!.delete(TableName,null,null)
+    }
+
     fun UpdateMenu(values: ContentValues, RowId: Int): String {
 
         var selectionArs = arrayOf(RowId.toString())

@@ -9,11 +9,18 @@
         android:orientation="vertical"
         android:layout_height="wrap_content">
 
+        <ImageButton
+            android:id="@+id/input_image"
+            android:layout_width="match_parent"
+            android:scaleType="centerInside"
+            android:layout_height="100dp" />
         <EditText
             android:padding="0dp"
             android:layout_width="match_parent"
             android:hint="이름을 입력해주세요"
             android:id="@+id/input_menu_name"
+            android:maxLines="1"
+            android:inputType="text"
             android:textSize="15sp"
             android:maxLength="50"
             android:layout_height="60dp" />
@@ -26,8 +33,16 @@
             android:inputType="numberDecimal"
             android:textSize="15sp"
             android:layout_height="60dp" />
-
-
+        <EditText
+            android:padding="0dp"
+            android:layout_width="match_parent"
+            android:hint="탭을 입력해주세요"
+            android:id="@+id/input_tab_name"
+            android:maxLines="1"
+            android:inputType="text"
+            android:textSize="15sp"
+            android:maxLength="20"
+            android:layout_height="60dp" />
 
     </LinearLayout>
 

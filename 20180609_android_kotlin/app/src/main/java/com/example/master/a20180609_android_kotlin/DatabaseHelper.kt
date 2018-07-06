@@ -5,12 +5,13 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
+import android.media.Image
 
 class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null, DBversion) {
 
     companion object {
         val DBName = "MenuDB"
-        val DBversion = 1
+        val DBversion = 2
 
         val TableName = "MenuTable"
         val PrimaryKey = "RowId"
@@ -18,6 +19,7 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
         val FirstColumn = "TabName"
         val SecondColumn = "MenuName"
         val ThirdColumn = "Price"
+        val FourthColumn = "Image"
     }
 
     var context: Context = context
@@ -25,7 +27,7 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
 
     override fun onCreate(DB: SQLiteDatabase?) {
         var CREATE_TABLE_SQL : String = "CREATE TABLE IF NOT EXISTS " + TableName + " " +
-                "(" + PrimaryKey + " INTEGER PRIMARY KEY," + FirstColumn + " TEXT," + SecondColumn + " TEXT," + ThirdColumn + " INTEGER);"
+                "(" + PrimaryKey + " INTEGER PRIMARY KEY," + FirstColumn + " TEXT," + SecondColumn + " TEXT," + ThirdColumn + " INTEGER," + FourthColumn + " BLOB);"
         DB!!.execSQL(CREATE_TABLE_SQL)
     }
 
@@ -71,15 +73,36 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
         }
     }
 
-    fun FetchMenu(): ArrayList<MenuData> {
+    fun FetchTabName(): ArrayList<String>{
+        var arraylist = ArrayList<String>()
+
+        val sqb = SQLiteQueryBuilder()
+        sqb.tables = TableName
+        sqb.setDistinct(true)
+        val cols = arrayOf("TabName")
+
+        val cur = sqb.query(sqlObj, cols, null, null, null, null, "TabName")
+
+        if (cur.moveToFirst()) {
+            do {
+                val TabName = cur.getString(cur.getColumnIndex("TabName"))
+                arraylist.add(TabName)
+            } while (cur.moveToNext())
+        }
+
+        return arraylist
+    }
+
+    fun FetchMenu(TabName : String): ArrayList<MenuData> {
 
         var arraylist = ArrayList<MenuData>()
 
         val sqb = SQLiteQueryBuilder()
         sqb.tables = TableName
-        val cols = arrayOf("RowId", "TabName", "MenuName", "Price")
+        val cols = arrayOf("RowId", "TabName", "MenuName", "Price", "Image")
+        val SelArg = arrayOf(TabName)
 
-        val cur = sqb.query(sqlObj, cols, null, null, null, null, "TabName")
+        val cur = sqb.query(sqlObj, cols, "TabName like ?", SelArg, null, null, "TabName")
 
         if (cur.moveToFirst()) {
             do {
@@ -87,8 +110,12 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
                 val TabName = cur.getString(cur.getColumnIndex("TabName"))
                 val MenuName = cur.getString(cur.getColumnIndex("MenuName"))
                 val Price = cur.getInt(cur.getColumnIndex("Price"))
+                val Image = cur.getBlob(cur.getColumnIndex("Image"))
 
                 val temp:MenuData = MenuData(TabName,MenuName,Price)
+                if(Image != null) {
+                    temp.Image = Image
+                }
                 temp.RowId = RowId
                 arraylist.add(temp)
 

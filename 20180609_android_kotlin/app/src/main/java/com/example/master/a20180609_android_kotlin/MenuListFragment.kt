@@ -12,9 +12,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 @SuppressLint("ValidFragment")
-class MenuListFragment(passedContext: Context) : Fragment(){
+class MenuListFragment(passedContext: Context,TabName: String) : Fragment(){
 
     val passThroughContext : Context = passedContext
+    val passName = TabName
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -23,7 +24,7 @@ class MenuListFragment(passedContext: Context) : Fragment(){
 
         val DB = DatabaseHelper(passThroughContext)
 
-        val MenuList = DB.FetchMenu()
+        val MenuList = DB.FetchMenu(passName)
 
         if(MenuList.size>0) {
 
@@ -39,8 +40,8 @@ class MenuListFragment(passedContext: Context) : Fragment(){
         return rootView
     }
     companion object {
-        fun newInstance(context: Context): MenuListFragment {
-            return MenuListFragment(context)
+        fun newInstance(context: Context, TabName : String): MenuListFragment {
+            return MenuListFragment(context,TabName)
         }
     }
 

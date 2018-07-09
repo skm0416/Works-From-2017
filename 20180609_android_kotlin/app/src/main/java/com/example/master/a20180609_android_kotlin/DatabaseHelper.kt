@@ -63,14 +63,19 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
 
     fun UpdateMenu(values: ContentValues, RowId: Int): String {
 
-        var selectionArs = arrayOf(RowId.toString())
+        var selectionArgs = arrayOf(RowId.toString())
 
-        val i = sqlObj!!.update(TableName, values, "RowId=?", selectionArs)
+        val i = sqlObj!!.update(TableName, values, "RowId=?", selectionArgs)
         if (i > 0) {
             return "ok";
         } else {
             return "error";
         }
+    }
+
+    fun RemoveTab(TabName: String) : Int{
+        var selectionArgs = arrayOf(TabName)
+        return sqlObj!!.delete(TableName,"TabName=?",selectionArgs)
     }
 
     fun FetchTabName(): ArrayList<String>{
@@ -99,7 +104,7 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
 
         val sqb = SQLiteQueryBuilder()
         sqb.tables = TableName
-        val cols = arrayOf("RowId", "TabName", "MenuName", "Price", "Image")
+        val cols = arrayOf("RowId", "MenuName", "Price", "Image")
         val SelArg = arrayOf(TabName)
 
         val cur = sqb.query(sqlObj, cols, "TabName like ?", SelArg, null, null, "TabName")
@@ -107,7 +112,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DBName, null
         if (cur.moveToFirst()) {
             do {
                 val RowId = cur.getInt(cur.getColumnIndex("RowId"))
-                val TabName = cur.getString(cur.getColumnIndex("TabName"))
                 val MenuName = cur.getString(cur.getColumnIndex("MenuName"))
                 val Price = cur.getInt(cur.getColumnIndex("Price"))
                 val Image = cur.getBlob(cur.getColumnIndex("Image"))

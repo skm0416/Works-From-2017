@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".server_menu_list">
+    tools:context=".user_menu_list">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <android.support.design.widget.TabLayout
-            android:id="@+id/server_menu_list_tabs"
+            android:id="@+id/user_menu_list_tabs"
             app:tabIndicatorColor="@color/blue"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/black"
@@ -28,11 +28,11 @@
             android:layout_weight="0.8">
 
             <android.support.v4.view.ViewPager
-                android:id="@+id/server_menu_list_container"
+                android:id="@+id/user_menu_list_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            </android.support.v4.view.ViewPager>
 
+            </android.support.v4.view.ViewPager>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,8 +47,7 @@
                 android:background="@color/gray"
                 android:gravity="center"
                 android:padding="0dp"
-                android:id="@+id/insert_menu"
-                android:text="메뉴 추가"
+                android:text="메뉴 담기"
                 android:textSize="15sp" />
             <TextView
                 android:layout_width="0dp"
@@ -57,8 +56,7 @@
                 android:background="@color/gray"
                 android:gravity="center"
                 android:padding="0dp"
-                android:id="@+id/remove_tab"
-                android:text="메뉴 삭제"
+                android:text="장바구니"
                 android:textSize="15sp" />
         </LinearLayout>
 

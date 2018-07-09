@@ -1,10 +1,11 @@
 package com.example.master.a20180609_android_kotlin
 
+import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import android.widget.TextView
 
 class MenuAdapter(private val MenuList: ArrayList<MenuData>) : RecyclerView.Adapter<MenuHolder>() {
 
@@ -14,7 +15,6 @@ class MenuAdapter(private val MenuList: ArrayList<MenuData>) : RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: MenuHolder, position: Int) {
-        //holder.itemView.setOnClickListener()
         holder.updateMenu(MenuList[position])
     }
 

@@ -11,20 +11,16 @@ import android.content.Intent
 import android.provider.MediaStore
 import android.graphics.Bitmap
 import android.app.Activity
-import android.content.Context
-import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.widget.*
 import java.io.ByteArrayOutputStream
-import java.io.FileNotFoundException
-import java.io.IOException
 
 
-val GET_FROM_GALLERY : Int = 1
 
 
 class server_menu_list : AppCompatActivity() {
-    private var mSectionsPagerAdapter: PageAdapter? = null
+    var mSectionsPagerAdapter: PageAdapter? = null
     private var mViewPager: ViewPager? = null
     private var ImageTarget: ImageButton? = null
 
@@ -32,21 +28,13 @@ class server_menu_list : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_server_menu_list)
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = PageAdapter(supportFragmentManager, this)
 
-        // Set up the ViewPager with the sections adapter.
         mViewPager = findViewById<ViewPager?>(R.id.server_menu_list_container)
         mViewPager!!.adapter = mSectionsPagerAdapter
 
         val tabLayout = findViewById<View>(R.id.server_menu_list_tabs) as TabLayout
         tabLayout.setupWithViewPager(mViewPager)
-
-
-
-
-
 
 
         val insertMenu = findViewById<TextView>(R.id.insert_menu)
@@ -103,11 +91,12 @@ class server_menu_list : AppCompatActivity() {
 
 
 
-        val removeMenu = findViewById<TextView>(R.id.remove_menu)
+        val removeTab = findViewById<TextView>(R.id.remove_tab)
 
-        removeMenu.setOnClickListener{
+        removeTab.setOnClickListener{
             val DB = DatabaseHelper(this)
-            var response = DB.RemoveAll()
+            var tabName = mSectionsPagerAdapter!!.getPageTitle(tabLayout.selectedTabPosition)
+            var response = DB.RemoveTab(tabName.toString())
             mSectionsPagerAdapter!!.notifyDataSetChanged()
             Toast.makeText(this, response.toString() + "개의 메뉴를 삭제했습니다", Toast.LENGTH_SHORT).show()
         }
@@ -119,9 +108,11 @@ class server_menu_list : AppCompatActivity() {
         if (requestCode == GET_FROM_GALLERY && resultCode == Activity.RESULT_OK) {
             val selectedImage = data!!.data
             val bitmap = MediaStore.Images.Media.getBitmap(this.contentResolver, selectedImage)
-            ImageTarget!!.setImageBitmap(bitmap)
+
+            ImageTarget!!.setImageBitmap(bitmap.rotate(90))
         }
     }
+
 
 
 }

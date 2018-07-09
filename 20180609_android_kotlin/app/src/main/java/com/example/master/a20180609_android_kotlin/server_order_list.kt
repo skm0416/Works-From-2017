@@ -35,6 +35,12 @@ class server_order_list : AppCompatActivity() {
             startActivity(secondIntent)
         }
 
+        val userMenu = findViewById<TextView>(R.id.user_menu)
+        userMenu.setOnClickListener {
+            val userIntent = Intent(this,user_menu_list::class.java)
+            startActivity(userIntent)
+        }
+
 
     }
 }

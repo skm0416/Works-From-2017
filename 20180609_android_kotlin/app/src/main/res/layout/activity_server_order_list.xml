@@ -18,7 +18,7 @@
             <TextView
                 android:padding="0dp"
                 android:layout_width="0dp"
-                android:layout_weight="0.7"
+                android:layout_weight="0.5"
                 android:gravity="center"
                 android:background="@color/yellow"
                 android:text="이름 없음"
@@ -28,11 +28,21 @@
             <TextView
                 android:padding="0dp"
                 android:layout_width="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.25"
                 android:gravity="center"
                 android:background="@color/gray"
-                android:text="설정"
+                android:text="메뉴수정"
                 android:id="@+id/shop_setting"
+                android:textSize="20sp"
+                android:layout_height="match_parent" />
+            <TextView
+                android:padding="0dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:background="@color/green"
+                android:text="유저메뉴"
+                android:id="@+id/user_menu"
                 android:textSize="20sp"
                 android:layout_height="match_parent" />
 

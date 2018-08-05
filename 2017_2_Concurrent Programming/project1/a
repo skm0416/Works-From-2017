@@ -1,0 +1,175 @@
+#include <iostream>
+#include <string>
+#include <set>
+#include <deque>
+#include <pthread.h>
+
+#define NUM_THREAD 48
+#define NUM_GROUP 108
+using namespace std;
+string copied_buf[NUM_THREAD];
+deque<string> task_set[(NUM_THREAD*NUM_GROUP)];
+deque<int> output;
+multiset<pair<size_t, string>> result[NUM_THREAD];
+pthread_t threads[NUM_THREAD*NUM_GROUP+1];
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond[NUM_THREAD];
+pthread_mutex_t thread_mutex[NUM_THREAD];
+int job_done[NUM_THREAD*NUM_GROUP];
+int end_program=0;
+
+void* FindingThread(void* arg){
+	int tid = (long) arg;
+	int thread = tid/NUM_GROUP;
+	string key_word;
+	size_t pos;
+	size_t npos = string::npos;
+	deque<string>::iterator it;
+	if(tid==NUM_THREAD*NUM_GROUP-1){
+		pthread_mutex_lock(&mutex);
+		job_done[tid]=0;
+		pthread_mutex_unlock(&mutex);
+	}
+	else{
+		job_done[tid]=0;
+	}
+	pthread_mutex_lock(&thread_mutex[thread]);
+	pthread_cond_wait(&cond[thread],&thread_mutex[thread]);
+	pthread_mutex_unlock(&thread_mutex[thread]);
+	while(1){
+		for(it=task_set[tid].begin();it!=task_set[tid].end();it++){
+			key_word=*it;
+			pos = copied_buf[thread].find(key_word);
+			if (pos != npos){
+				pthread_mutex_lock(&thread_mutex[thread]);
+				result[thread].insert(make_pair(pos,key_word));
+				pthread_mutex_unlock(&thread_mutex[thread]);
+			}
+		}
+		task_set[tid].clear();
+		job_done[tid]=1;
+		pthread_mutex_lock(&thread_mutex[thread]);
+		pthread_cond_wait(&cond[thread],&thread_mutex[thread]);
+		pthread_mutex_unlock(&thread_mutex[thread]);
+	}
+}
+
+void* printThread(void* arg){
+	int cnt;
+	int thread;
+	multiset<pair<size_t, string>>::iterator result_it;
+	while(1){
+		while(output.empty()){
+			if(end_program){
+				return 0;
+			}
+			else{
+				pthread_yield();
+			}
+		}
+		pthread_mutex_lock(&mutex);
+		thread=*output.begin();
+		output.pop_front();
+		pthread_mutex_unlock(&mutex);
+		
+		for(int i=0; i<NUM_GROUP; i++){
+			while(job_done[(thread*NUM_GROUP)+i]<1){
+				pthread_yield();
+			}
+		}
+		
+		result_it = result[thread].begin();
+        cnt = result[thread].size();
+       	if (cnt == 0){
+       		cout <<"-1"<<endl;
+     	}
+		else{
+       		for (; cnt != 0; cnt--, result_it++){
+      			cout << result_it->second;
+				if (cnt != 1){
+					cout << "|";
+           		}
+       		}
+			cout <<endl;
+		}
+		result[thread].clear();
+		job_done[thread*NUM_GROUP]=-1;
+	}
+}
+
+int main(){
+	int N;
+	int cnt;
+	int thread=-1;
+	set<string> word_list;
+	set<string>::iterator it;
+	string buf;
+	char cmd;
+
+	for(int i=0;i<NUM_THREAD;i++){
+		cond[i] = PTHREAD_COND_INITIALIZER;
+		thread_mutex[i] = PTHREAD_MUTEX_INITIALIZER;
+	}
+	pthread_create(&threads[NUM_THREAD*NUM_GROUP],0,printThread,NULL);
+	for(long i=0; i<(NUM_THREAD*NUM_GROUP); i++){
+		job_done[i]=-1;
+		pthread_create(&threads[i],0,FindingThread,(void *)i);
+	}
+	for(int i=0; i<(NUM_THREAD*NUM_GROUP); i++){
+		while(job_done[i]<0){
+			pthread_yield();
+		}
+	}
+	pthread_mutex_lock(&mutex);
+	pthread_mutex_unlock(&mutex);
+	for(int i=0;i<NUM_THREAD*NUM_GROUP;i+=NUM_GROUP){
+		job_done[i]=-1;
+	}
+   	cin >> N;
+   	for (int i = 0; i < N; i++){
+       	cin >> buf;
+       	word_list.insert(buf);
+	}	
+    
+	cout << "R" << std::endl;
+	while(cin>>cmd){
+    	cin.get();
+    	getline(cin, buf);
+    	switch(cmd){
+			case 'Q':
+				while(thread<0){
+					for(int i=0;i<NUM_THREAD*NUM_GROUP;i+=NUM_GROUP){
+						if(job_done[i]<0){
+							thread=i/NUM_GROUP;
+							break;
+						}
+					}
+					pthread_yield();
+				}
+				for(int i=0; i<NUM_GROUP; i++){
+					job_done[thread*NUM_GROUP+i]=0;
+				}
+				copied_buf[thread]=buf;
+				cnt=0;
+				for(it=word_list.begin();it!=word_list.end();it++){
+					task_set[thread*NUM_GROUP+((cnt++)%NUM_GROUP)].push_back(*it);
+				}
+				pthread_mutex_lock(&mutex);
+				output.push_back(thread);
+				pthread_mutex_unlock(&mutex);
+				pthread_cond_broadcast(&cond[thread]);
+				thread=-1;
+               	break;
+           	case 'A':
+               	word_list.insert(buf);
+               	break;
+           	case 'D':
+               	word_list.erase(buf);
+               	break;
+       	}
+   	}
+	end_program=1;
+	pthread_join(threads[NUM_THREAD*NUM_GROUP],NULL);
+    return 0;
+}
+

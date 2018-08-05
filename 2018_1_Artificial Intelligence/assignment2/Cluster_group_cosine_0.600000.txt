@@ -1,0 +1,572 @@
+cluster 0
+bargain 
+cluster 1
+discount 
+cluster 2
+fortune 
+cluster 3
+jackpot 
+cluster 4
+confessions 
+cluster 5
+results 
+cluster 6
+seize 
+cluster 7
+liberated 
+cluster 8
+unburdened 
+cluster 9
+revolutionary 
+cluster 10
+freedom 
+cluster 11
+world 
+cluster 12
+bold 
+cluster 13
+daring 
+cluster 14
+courageous brave 
+cluster 15
+agenda 
+cluster 16
+deadline 
+cluster 17
+should 
+cluster 18
+urge 
+cluster 19
+encouraged 
+cluster 20
+hesitant 
+cluster 21
+anxious eager 
+cluster 22
+keen 
+cluster 23
+waiting 
+cluster 24
+forbidden banned 
+cluster 25
+blacklisted 
+cluster 26
+censored 
+cluster 27
+underground 
+cluster 28
+secret 
+cluster 29
+covert 
+cluster 30
+concealed hidden 
+cluster 31
+misgiving 
+cluster 32
+argumentative 
+cluster 33
+antagonistic 
+cluster 34
+quarrelsome 
+cluster 35
+inconsiderate 
+cluster 36
+judgmental 
+cluster 37
+condescending sarcastic 
+cluster 38
+suspicious 
+cluster 39
+malicious 
+cluster 40
+provoke 
+cluster 41
+aggravate 
+cluster 42
+contrary 
+cluster 43
+unjustified 
+cluster 44
+controlling 
+cluster 45
+responsible 
+cluster 46
+incapable capable 
+cluster 47
+dishonest 
+cluster 48
+manipulative 
+cluster 49
+corrupting 
+cluster 50
+powerless 
+cluster 51
+disempowered 
+cluster 52
+empowered 
+cluster 53
+privileged 
+cluster 54
+controversial 
+cluster 55
+important critical 
+cluster 56
+severe 
+cluster 57
+harsh 
+cluster 58
+damaging 
+cluster 59
+harmful 
+cluster 60
+tense 
+cluster 61
+jittery 
+cluster 62
+pessimistic optimistic 
+cluster 63
+upbeat 
+cluster 64
+hopeful confident 
+cluster 65
+offensive 
+cluster 66
+threatened 
+cluster 67
+retaliating 
+cluster 68
+condemning 
+cluster 69
+reprimanding 
+cluster 70
+vilified 
+cluster 71
+missing 
+cluster 72
+trapped 
+cluster 73
+paralyzed 
+cluster 74
+incapacitated 
+cluster 75
+distracted 
+cluster 76
+fatigued 
+cluster 77
+indecisive 
+cluster 78
+incompetent 
+cluster 79
+uncaring 
+cluster 80
+distrustful resentful 
+cluster 81
+disillusioned alienated 
+cluster 82
+uninterested 
+cluster 83
+frustrated exasperated impatient 
+cluster 84
+vulnerable 
+cluster 85
+insecure 
+cluster 86
+unreliable 
+cluster 87
+unstable 
+cluster 88
+unresponsive 
+cluster 89
+responsive 
+cluster 90
+enthusiastic 
+cluster 91
+energetic exuberant 
+cluster 92
+aggressive 
+cluster 93
+tenacious 
+cluster 94
+frenzied 
+cluster 95
+earnest 
+cluster 96
+spirited 
+cluster 97
+vigorous 
+cluster 98
+focused 
+cluster 99
+centered 
+cluster 100
+grounded 
+cluster 101
+rested 
+cluster 102
+terrible atrocious dreadful 
+cluster 103
+pathetic 
+cluster 104
+shameful deplorable despicable 
+cluster 105
+tragic 
+cluster 106
+innocent 
+cluster 107
+helplessness 
+cluster 108
+agony 
+cluster 109
+ordeal 
+cluster 110
+compulsive 
+cluster 111
+violent 
+cluster 112
+rebellious 
+cluster 113
+cowardly 
+cluster 114
+wicked 
+cluster 115
+repulsive 
+cluster 116
+sadistic 
+cluster 117
+jealous 
+cluster 118
+vindictive spiteful 
+cluster 119
+revengeful 
+cluster 120
+venomous 
+cluster 121
+poisonous 
+cluster 122
+disdainful scornful 
+cluster 123
+gleeful 
+cluster 124
+enraged infuriated furious 
+cluster 125
+seething 
+cluster 126
+disoriented 
+cluster 127
+agitated 
+cluster 128
+terrified panicked 
+cluster 129
+distressed 
+cluster 130
+desperate 
+cluster 131
+distraught 
+cluster 132
+dejected 
+cluster 133
+embarrassed appalled disgusted 
+cluster 134
+alarmed 
+cluster 135
+perplexed astounded surprised 
+cluster 136
+overwhelmed 
+cluster 137
+repulsed 
+cluster 138
+motivated 
+cluster 139
+inspired 
+cluster 140
+instantly instant 
+cluster 141
+quick 
+cluster 142
+immediately 
+cluster 143
+squirming 
+cluster 144
+twitching 
+cluster 145
+uncomfortable awkward 
+cluster 146
+woozy 
+cluster 147
+fluid 
+cluster 148
+spontaneous 
+cluster 149
+unhurried 
+cluster 150
+meditative 
+cluster 151
+joyous jubilant 
+cluster 152
+euphoric 
+cluster 153
+exhilarated 
+cluster 154
+uplifted 
+cluster 155
+beaming smiling 
+cluster 156
+blushing 
+cluster 157
+laughing 
+cluster 158
+calm quiet 
+cluster 159
+serene placid 
+cluster 160
+cheerful jovial 
+cluster 161
+stoic 
+cluster 162
+unassuming 
+cluster 163
+frisky 
+cluster 164
+spunky 
+cluster 165
+youthful 
+cluster 166
+radiant 
+cluster 167
+graceful 
+cluster 168
+save 
+cluster 169
+reduced 
+cluster 170
+eliminate 
+cluster 171
+introducing 
+cluster 172
+approving 
+cluster 173
+cover 
+cluster 174
+scoop 
+cluster 175
+extra 
+cluster 176
+freebie 
+cluster 177
+confidential 
+cluster 178
+insider 
+cluster 179
+scandal 
+cluster 180
+outrageousness 
+cluster 181
+humility 
+cluster 182
+clarity 
+cluster 183
+transparency 
+cluster 184
+miracle 
+cluster 185
+doomed 
+cluster 186
+disastrous 
+cluster 187
+explode 
+cluster 188
+skyrocket 
+cluster 189
+magical 
+cluster 190
+glorious 
+cluster 191
+remarkable astonishing 
+cluster 192
+sensational 
+cluster 193
+startling shocking 
+cluster 194
+cooperative 
+cluster 195
+constructive 
+cluster 196
+productive 
+cluster 197
+genuine 
+cluster 198
+sincere 
+cluster 199
+honest truthful 
+cluster 200
+trustworthy 
+cluster 201
+trusting 
+cluster 202
+animated 
+cluster 203
+lighthearted playful 
+cluster 204
+funny 
+cluster 205
+creative 
+cluster 206
+vibrant 
+cluster 207
+dynamic 
+cluster 208
+unique 
+cluster 209
+authentic 
+cluster 210
+bountiful 
+cluster 211
+natural 
+cluster 212
+balanced 
+cluster 213
+healthy 
+cluster 214
+stable 
+cluster 215
+steady 
+cluster 216
+festive 
+cluster 217
+blissful 
+cluster 218
+carefree 
+cluster 219
+sunny 
+cluster 220
+glowing 
+cluster 221
+bright 
+cluster 222
+light 
+cluster 223
+reflective 
+cluster 224
+agree 
+cluster 225
+recommend 
+cluster 226
+suggest 
+cluster 227
+stressed 
+cluster 228
+emphasize 
+cluster 229
+clear 
+cluster 230
+sure 
+cluster 231
+aware 
+cluster 232
+proven 
+cluster 233
+truly 
+cluster 234
+absolutely 
+cluster 235
+extremely 
+cluster 236
+worthwhile 
+cluster 237
+helpful 
+cluster 238
+convenient 
+cluster 239
+easy 
+cluster 240
+effective 
+cluster 241
+efficient 
+cluster 242
+authoritative 
+cluster 243
+accurate reliable 
+cluster 244
+adaptable 
+cluster 245
+resourceful 
+cluster 246
+intelligent 
+cluster 247
+conscientious 
+cluster 248
+superior inferior 
+cluster 249
+disadvantages 
+cluster 250
+advantage 
+cluster 251
+profitable 
+cluster 252
+investment 
+cluster 253
+content 
+cluster 254
+guaranteed 
+cluster 255
+satisfied 
+cluster 256
+assured 
+cluster 257
+safe 
+cluster 258
+secure 
+cluster 259
+adequate 
+cluster 260
+violated 
+cluster 261
+fulfilled 
+cluster 262
+supportive 
+cluster 263
+supported 
+cluster 264
+aligned 
+cluster 265
+magnificent superb 
+cluster 266
+unbelievable tremendous 
+cluster 267
+excellent 
+cluster 268
+solid 
+cluster 269
+honored 
+cluster 270
+overjoyed ecstatic elated 
+cluster 271
+delighted gratified thrilled pleased 
+cluster 272
+thankful grateful 
+cluster 273
+wonderful 
+cluster 274
+blessed 
+cluster 275
+tickled 
+cluster 276
+doubtful 
+cluster 277
+uncertain unsure 
+cluster 278
+limited 
+cluster 279
+certain 
+cluster 280
+always certainly definitely 
+cluster 281
+still 
+cluster 282
+okay 
+cluster 283
+fine 
+cluster 284
+forgiving 
+cluster 285
+comfortable relaxed 

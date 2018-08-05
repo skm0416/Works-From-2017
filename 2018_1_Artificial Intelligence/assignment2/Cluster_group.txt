@@ -1,0 +1,164 @@
+cluster 0
+bargain discount 
+cluster 1
+fortune jackpot 
+cluster 2
+confessions results 
+cluster 3
+seize 
+cluster 4
+liberated unburdened 
+cluster 5
+revolutionary freedom 
+cluster 6
+world 
+cluster 7
+courageous bold brave daring 
+cluster 8
+agenda deadline 
+cluster 9
+should urge hesitant anxious encouraged eager keen waiting 
+cluster 10
+forbidden banned blacklisted censored 
+cluster 11
+underground 
+cluster 12
+secret concealed covert hidden 
+cluster 13
+misgiving 
+cluster 14
+judgmental argumentative condescending inconsiderate antagonistic quarrelsome sarcastic 
+cluster 15
+suspicious malicious 
+cluster 16
+provoke aggravate contrary unjustified 
+cluster 17
+incapable controlling responsible capable 
+cluster 18
+dishonest manipulative corrupting 
+cluster 19
+disempowered powerless privileged empowered 
+cluster 20
+controversial important critical 
+cluster 21
+severe damaging harmful harsh 
+cluster 22
+tense jittery pessimistic optimistic hopeful upbeat confident 
+cluster 23
+offensive 
+cluster 24
+threatened condemning retaliating reprimanding vilified 
+cluster 25
+missing trapped 
+cluster 26
+distracted paralyzed fatigued incapacitated 
+cluster 27
+indecisive disillusioned distrustful incompetent uncaring uninterested frustrated resentful exasperated impatient alienated 
+cluster 28
+vulnerable insecure unreliable unstable 
+cluster 29
+unresponsive responsive 
+cluster 30
+frenzied aggressive energetic spirited vigorous earnest enthusiastic tenacious exuberant 
+cluster 31
+focused grounded centered 
+cluster 32
+rested 
+cluster 33
+pathetic shameful terrible tragic atrocious deplorable dreadful despicable innocent 
+cluster 34
+helplessness ordeal agony 
+cluster 35
+compulsive violent rebellious 
+cluster 36
+cowardly repulsive wicked vindictive sadistic spiteful venomous poisonous jealous revengeful 
+cluster 37
+disdainful enraged infuriated furious seething scornful gleeful 
+cluster 38
+disoriented distressed distraught terrified panicked agitated desperate dejected 
+cluster 39
+perplexed embarrassed overwhelmed alarmed appalled disgusted repulsed astounded surprised motivated inspired 
+cluster 40
+instantly quick instant immediately 
+cluster 41
+uncomfortable awkward squirming woozy twitching 
+cluster 42
+unhurried fluid spontaneous meditative 
+cluster 43
+joyous jubilant euphoric exhilarated uplifted 
+cluster 44
+blushing beaming smiling laughing 
+cluster 45
+cheerful jovial calm quiet serene unassuming placid stoic 
+cluster 46
+frisky spunky youthful radiant graceful 
+cluster 47
+save reduced eliminate 
+cluster 48
+introducing approving 
+cluster 49
+cover scoop 
+cluster 50
+extra freebie 
+cluster 51
+confidential insider 
+cluster 52
+scandal 
+cluster 53
+outrageousness clarity transparency humility 
+cluster 54
+miracle doomed disastrous 
+cluster 55
+explode skyrocket 
+cluster 56
+magical remarkable sensational startling shocking astonishing glorious 
+cluster 57
+constructive cooperative productive 
+cluster 58
+trustworthy honest truthful genuine sincere trusting 
+cluster 59
+lighthearted playful animated funny 
+cluster 60
+creative vibrant unique dynamic authentic 
+cluster 61
+bountiful natural 
+cluster 62
+stable balanced healthy steady 
+cluster 63
+blissful festive sunny carefree 
+cluster 64
+glowing bright reflective light 
+cluster 65
+agree recommend suggest 
+cluster 66
+stressed emphasize clear sure aware 
+cluster 67
+proven truly extremely absolutely 
+cluster 68
+worthwhile convenient easy effective helpful efficient 
+cluster 69
+authoritative accurate adaptable intelligent resourceful reliable conscientious 
+cluster 70
+superior inferior disadvantages advantage 
+cluster 71
+profitable investment 
+cluster 72
+content 
+cluster 73
+safe guaranteed secure satisfied assured adequate 
+cluster 74
+violated fulfilled 
+cluster 75
+supportive supported aligned 
+cluster 76
+unbelievable magnificent superb tremendous excellent solid 
+cluster 77
+honored delighted overjoyed thankful ecstatic elated gratified thrilled wonderful tickled pleased blessed grateful 
+cluster 78
+doubtful uncertain unsure 
+cluster 79
+limited certain 
+cluster 80
+always certainly definitely okay still 
+cluster 81
+fine forgiving comfortable relaxed 

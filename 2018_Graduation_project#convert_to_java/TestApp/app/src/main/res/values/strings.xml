@@ -1,3 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2006 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
 <resources>
-    <string name="app_name">20180924_android_java</string>
+    <!-- application name and title of error dialogs-->
+    <string name="app_name">TestApp</string>
+    <string name="speechrecorderlabel">Speech Recorder</string>
+    <string name="testButton">Test</string>
+    <string name="baksmaliButton">Baksmali</string>
+    <string name="smaliButton">Smali</string>
+    <string name="redoButton">Redo</string>
+    <string name="serverButton">Server</string>
+    <string name="sendMain">Main Send</string>
+    <string name="sendA">A Send</string>
+    <string name="sendB">B Send</string>
+    <string name="sendC">C Send</string>
+    <string name="sendD">D Send</string>
+    <string name="sendE">E Send</string>
+    <string name="sendF">F Send</string>
+    <string name="sendG">G Send</string>
+    <string name="sendH">H Send</string>
+    <string name="sendI">I Send</string>
+    <string name="sendJ">J Send</string>
+    <string name="Main_title">ABCDEEE</string>
+    <string name="A_title">A</string>
+    <string name="B_title">B</string>
+    <string name="C_title">C</string>
+    <string name="D_title">D</string>
+    <string name="E_title">E</string>
+    <string name="F_title">F</string>
+    <string name="G_title">G</string>
+    <string name="H_title">H</string>
+    <string name="I_title">I</string>
+    <string name="J_title">J</string>
+    <string name="device1">device1</string>
+    <string name="device2">device2</string>
+    <string name="device3">device3</string>
+    <string name="sendResource">Resource Send</string>
+    <string name="request_send">Request Send</string>
+    <string name="dummy1">dummy1</string>
+    <string name="dummy2">dummy2</string>
+    <string name="server_order_list">server_order_list</string>
+    <string name="user_menu__list">user_menu__list</string>
+    <string name="sml1">메뉴 추가</string>
+    <string name="sml2">탭 삭제</string>
+    <string name="sol1">이름 없음</string>
+    <string name="sol2">메뉴수정</string>
+    <string name="sol3">유저메뉴</string>
+    <string name="uml1">메뉴 담기</string>
+    <string name="uml2">장바구니</string>
 </resources>

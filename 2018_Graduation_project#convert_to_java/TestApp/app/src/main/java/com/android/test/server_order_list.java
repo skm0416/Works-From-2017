@@ -1,5 +1,6 @@
 package com.android.test;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,20 +8,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.service.samd.SAMDManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
-public final class server_order_list extends AppCompatActivity {
-    private HashMap _$_findViewCache;
-    SAMDManager S;
+public final class server_order_list extends Activity {
+    //SAMDManager S;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_server_order_list);
+        //S = new SAMDManager(getApplicationContext());
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         final SharedPreferences.Editor editor = pref.edit();
@@ -61,26 +61,5 @@ public final class server_order_list extends AppCompatActivity {
                 //S.launchActivity("user_menu_list");
             }
         }));
-    }
-
-    public View _$_findCachedViewById(int var1) {
-        if (this._$_findViewCache == null) {
-            this._$_findViewCache = new HashMap();
-        }
-
-        View var2 = (View)this._$_findViewCache.get(var1);
-        if (var2 == null) {
-            var2 = this.findViewById(var1);
-            this._$_findViewCache.put(var1, var2);
-        }
-
-        return var2;
-    }
-
-    public void _$_clearFindViewByIdCache() {
-        if (this._$_findViewCache != null) {
-            this._$_findViewCache.clear();
-        }
-
     }
 }

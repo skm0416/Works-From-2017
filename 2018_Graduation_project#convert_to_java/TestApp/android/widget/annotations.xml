@@ -1,0 +1,5 @@
+<root>
+    <item name='android.widget.ListView void setAdapter(android.widget.ListAdapter)'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>

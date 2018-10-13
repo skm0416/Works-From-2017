@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,23 +18,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Adapter;
-import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.app.Fragment;
 import android.view.View.OnClickListener;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
@@ -46,32 +44,26 @@ import static com.android.test.user_menu_list.GET_FROM_GALLERY;
 
 @SuppressLint({"ValidFragment"})
 public final class MenuListFragment extends Fragment {
-    private final Context passThroughContext;
-    private final String passName;
+    private String passName = null;
     private ImageButton ImageTarget;
-    private HashMap _$_findViewCache;
 
-    public final Context getPassThroughContext() {
-        return this.passThroughContext;
-    }
     public final String getPassName() {
         return this.passName;
     }
 
-    public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.menu_fragment, container, false);
-        final RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.MenuRecyclerView);
-        DatabaseHelper DB = new DatabaseHelper(this.passThroughContext);
+        final ListView listView = (ListView)rootView.findViewById(R.id.MenuListView);
+        DatabaseHelper DB = new DatabaseHelper(this.getContext());
         ArrayList MenuList = DB.FetchMenu(this.passName);
-        recyclerView.setAdapter((Adapter)(new MenuAdapter(MenuList)));
-        recyclerView.setLayoutManager((LayoutManager)(new LinearLayoutManager(this.passThroughContext)));
-        recyclerView_Listener.addOnItemClickListener(recyclerView, (OnItemClickListener)(new OnItemClickListener() {
-            public void onItemClicked(int position, View view) {
-                Context context = MenuListFragment.this.getPassThroughContext();
+        listView.setAdapter(new MenuAdapter(MenuList));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                Context context = MenuListFragment.this.getContext();
                 Activity activity = (Activity) context;
-                TabLayout tabLayout = (TabLayout) activity.findViewById(R.id.server_menu_list_tabs);
-                ViewPager pager = (ViewPager) activity.findViewById(R.id.server_menu_list_container);
-                final PagerAdapter adapter = pager.getAdapter();
+                final HorizontalScrollView scrollview = (HorizontalScrollView) activity.findViewById(R.id.server_menu_list_tabs);
                 TextView menunumber = (TextView) view.findViewById(R.id.MenuNumber);
                 final int rowid = Integer.parseInt(menunumber.getText().toString());
                 AlertDialog.Builder alert = new AlertDialog.Builder(context);
@@ -86,12 +78,15 @@ public final class MenuListFragment extends Fragment {
                 final ImageButton image = (ImageButton) dialogView.findViewById(R.id.input_image);
                 image.setOnClickListener((OnClickListener) (new OnClickListener() {
                     public final void onClick(View it) {
-                        MenuListFragment.this.startActivityForResult(new Intent("android.intent.action.PICK", Media.INTERNAL_CONTENT_URI), 1);
+                        Intent intent = new Intent();
+                        intent.setType("image/*");
+                        intent.setAction(Intent.ACTION_GET_CONTENT);
+                        MenuListFragment.this.startActivityForResult(Intent.createChooser(intent, "Select Picture"), GET_FROM_GALLERY);
                     }
                 }));
                 MenuListFragment.this.ImageTarget = image;
 
-                tab_name.setText(adapter.getPageTitle(tabLayout.getSelectedTabPosition()));
+                tab_name.setText(passName);
                 TextView temp = (TextView) view.findViewById(R.id.MenuPrice);
                 String tempstr = temp.getText().toString();
                 price.setText(tempstr.substring(0,tempstr.length()-2));
@@ -105,7 +100,7 @@ public final class MenuListFragment extends Fragment {
                 alert.setView(dialogView);
                 alert.setPositiveButton((CharSequence) "수정", (android.content.DialogInterface.OnClickListener) (new android.content.DialogInterface.OnClickListener() {
                     public final void onClick(DialogInterface dialog, int whichButton) {
-                        DatabaseHelper DB = new DatabaseHelper(MenuListFragment.this.getPassThroughContext());
+                        DatabaseHelper DB = new DatabaseHelper(MenuListFragment.this.getContext());
                         ContentValues values = new ContentValues();
                         BitmapDrawable drawable = (BitmapDrawable) image.getDrawable();
                         if (drawable != null) {
@@ -127,23 +122,27 @@ public final class MenuListFragment extends Fragment {
 
                         response = DB.UpdateMenu(values, rowid);
                         if (response.equalsIgnoreCase("ok")) {
-                            Toast.makeText(MenuListFragment.this.getPassThroughContext(), (CharSequence) "메뉴수정 성공", Toast.LENGTH_SHORT).show();
-                            adapter.notifyDataSetChanged();
+                            Toast.makeText(MenuListFragment.this.getContext(), (CharSequence) "메뉴수정 성공", Toast.LENGTH_SHORT).show();
+                            Fragment itemfragment = new MenuListFragment(passName);
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.server_menu_list_container, itemfragment).commitAllowingStateLoss();
                         } else {
-                            Toast.makeText(MenuListFragment.this.getPassThroughContext(), (CharSequence) "메뉴수정 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MenuListFragment.this.getContext(), (CharSequence) "메뉴수정 실패", Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 }));
                 alert.setNeutralButton((CharSequence) "삭제", (android.content.DialogInterface.OnClickListener) (new android.content.DialogInterface.OnClickListener() {
                     public final void onClick(DialogInterface dialog, int whichButton) {
-                        DatabaseHelper DB = new DatabaseHelper(recyclerView.getContext());
+                        DatabaseHelper DB = new DatabaseHelper(scrollview.getContext());
                         String response = DB.RemoveMenu(rowid);
                         if (response.equalsIgnoreCase("ok")) {
-                            Toast.makeText(MenuListFragment.this.getPassThroughContext(), (CharSequence) "메뉴삭제 성공", Toast.LENGTH_SHORT).show();
-                            adapter.notifyDataSetChanged();
+                            Toast.makeText(MenuListFragment.this.getContext(), (CharSequence) "메뉴삭제 성공", Toast.LENGTH_SHORT).show();
+                            Fragment itemfragment = new MenuListFragment(passName);
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.server_menu_list_container, itemfragment).commitAllowingStateLoss();
                         } else {
-                            Toast.makeText(MenuListFragment.this.getPassThroughContext(), (CharSequence) "메뉴삭제 실패", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MenuListFragment.this.getContext(), (CharSequence) "메뉴삭제 실패", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -151,10 +150,10 @@ public final class MenuListFragment extends Fragment {
                 alert.setNegativeButton((CharSequence) "취소", (android.content.DialogInterface.OnClickListener) null);
                 alert.show();
             }
-        }));
+        });
+
         return rootView;
     }
-
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -170,47 +169,9 @@ public final class MenuListFragment extends Fragment {
         }
 
     }
-
-    public MenuListFragment(Context passedContext,  String TabName) {
+    public MenuListFragment(){}
+    public MenuListFragment(String TabName) {
         super();
-        this.passThroughContext = passedContext;
         this.passName = TabName;
-    }
-
-    // $FF: synthetic method
-    public static final ImageButton access$getImageTarget$p(MenuListFragment $this) {
-        return $this.ImageTarget;
-    }
-
-    public View _$_findCachedViewById(int var1) {
-        if (this._$_findViewCache == null) {
-            this._$_findViewCache = new HashMap();
-        }
-
-        View var2 = (View)this._$_findViewCache.get(var1);
-        if (var2 == null) {
-            View var10000 = this.getView();
-            if (var10000 == null) {
-                return null;
-            }
-
-            var2 = var10000.findViewById(var1);
-            this._$_findViewCache.put(var1, var2);
-        }
-
-        return var2;
-    }
-
-    public void _$_clearFindViewByIdCache() {
-        if (this._$_findViewCache != null) {
-            this._$_findViewCache.clear();
-        }
-
-    }
-
-    // $FF: synthetic method
-    public void onDestroyView() {
-        super.onDestroyView();
-        this._$_clearFindViewByIdCache();
     }
 }

@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -19,34 +20,34 @@ import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.android.test.*;
 
 import static com.android.test.user_menu_list.GET_FROM_GALLERY;
 
 public final class user_menu_list extends Activity {
     public static final int GET_FROM_GALLERY = 1;
-    private DatabaseHelper DB;
+    private static final String TAG = "Dummy2";
     private ArrayList tabNameArray;
-    private String curtitle;
+    private ArrayList fragArray;
+    private ArrayList OrderNumber;
+    private ArrayList<Integer> MenuOrder;
     private int curtab;
     private int tabsize;
+    private int MenuIndex;
+
 
     public void setPage(final Context context){
-        this.DB = new DatabaseHelper(context);
-        this.tabNameArray = this.DB.FetchTabName();
-        this.tabsize = tabNameArray.size();
-        if(tabsize == 0) {
-            curtitle = "";
-        }
-        else {
-            curtitle = (String) tabNameArray.get(curtab);
-        }
-        LinearLayout tabparent = (LinearLayout)findViewById(R.id.tab_parent);
+        LinearLayout tabparent = (LinearLayout)findViewById(R.id.tab_parent2);
         tabparent.removeAllViewsInLayout();
         for (int i = 0; i < tabNameArray.size(); i++) {
             TextView tv = new TextView(getApplicationContext());
@@ -72,7 +73,12 @@ public final class user_menu_list extends Activity {
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    Fragment nowfrag = (Fragment)fragArray.get(curtab);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_NONE).hide(nowfrag);
                     curtab = now;
+                    nowfrag = (Fragment)fragArray.get(curtab);
+                    transaction.setTransition(FragmentTransaction.TRANSIT_NONE).show(nowfrag).commit();
                     setPage(context);
                 }
             });
@@ -80,17 +86,44 @@ public final class user_menu_list extends Activity {
 
         }
 
-        Fragment itemfragment = new MenuListFragment(curtitle);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.server_menu_list_container, itemfragment).commitAllowingStateLoss();
+
     }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_user_menu_list);
 
-        Context context = this;
+        Intent intent = getIntent();
         curtab = 0;
+        MenuIndex = intent.getIntExtra("MenuIndex",0);
+        tabNameArray = (ArrayList) intent.getSerializableExtra("tabNameArray");
+        fragArray = new ArrayList();
+        tabsize = tabNameArray.size();
+        MenuOrder = new ArrayList<Integer>(Collections.nCopies(MenuIndex, 0));
+        com.android.test.MenuOrder.getInstance().setMenuOrder(MenuOrder);
+        ArrayList Tabmenu = (ArrayList) intent.getSerializableExtra("Tabmenu");
+
+        for(int i=0; i<tabsize; i++){
+            Fragment itemfragment = new User_MenuListFragment((String)tabNameArray.get(i),(ArrayList)Tabmenu.get(i));
+            fragArray.add(itemfragment);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.setTransition(FragmentTransaction.TRANSIT_NONE).add(R.id.user_menu_list_container, itemfragment).hide(itemfragment).commit();
+        }
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Fragment nowfrag = (Fragment)fragArray.get(curtab);
+        transaction.setTransition(FragmentTransaction.TRANSIT_NONE).show(nowfrag).commit();
         setPage(this);
+
+        TextView order = (TextView)this.findViewById(R.id.calculate_order);
+        order.setOnClickListener((View.OnClickListener)(new View.OnClickListener() {
+            public final void onClick(View it) {
+                MenuOrder = com.android.test.MenuOrder.getInstance().getMenuOrder();
+                String msg = new String();
+                for(int i=0; i<MenuOrder.size(); i++)
+                    msg = msg + String.valueOf(MenuOrder.get(i)) + " ";
+                Toast.makeText((Context)user_menu_list.this, (CharSequence)msg, Toast.LENGTH_SHORT).show();
+            }
+        }));
     }
 }

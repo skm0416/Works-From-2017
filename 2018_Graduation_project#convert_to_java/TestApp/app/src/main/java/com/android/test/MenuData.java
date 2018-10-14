@@ -1,6 +1,8 @@
 package com.android.test;
 
-public final class MenuData {
+import java.io.Serializable;
+
+public final class MenuData implements Serializable {
     private Integer RowId;
     private byte[] Image;
     private String TabName;

@@ -59,6 +59,8 @@
     <string name="sol1">이름 없음</string>
     <string name="sol2">메뉴수정</string>
     <string name="sol3">유저메뉴</string>
-    <string name="uml1">메뉴 담기</string>
-    <string name="uml2">장바구니</string>
+    <string name="uml1">주문하기</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="zero">0</string>
 </resources>

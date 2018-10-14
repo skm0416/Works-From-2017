@@ -2,20 +2,25 @@ package com.android.test;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.service.samd.SAMDManager;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public final class server_order_list extends Activity {
     //SAMDManager S;
+    private static final String TAG = "TestApp";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +61,28 @@ public final class server_order_list extends Activity {
         TextView userMenu = (TextView)this.findViewById(R.id.user_menu);
         userMenu.setOnClickListener((View.OnClickListener)(new View.OnClickListener() {
             public final void onClick(View it) {
+                Context context = (Context)server_order_list.this;
+                DatabaseHelper DB = new DatabaseHelper(context);
+                ArrayList tabNameArray = DB.FetchTabName();
+                int tabsize = tabNameArray.size();
+                ArrayList Tabmenu = new ArrayList<>();
+                int MenuIndex = 0;
+                for(int i=0; i<tabsize; i++){
+                    ArrayList MenuList = DB.FetchMenu((String)tabNameArray.get(i));
+                    for(int j=0; j<MenuList.size(); j++){
+                        int temp = ((MenuData)MenuList.get(j)).getRowId();
+                        if(MenuIndex < temp)
+                            MenuIndex = temp;
+                    }
+                    Tabmenu.add(MenuList);
+                }
+
+
+
                 Intent userIntent = new Intent((Context)server_order_list.this, user_menu_list.class);
+                userIntent.putExtra("tabNameArray",tabNameArray);
+                userIntent.putExtra("Tabmenu",Tabmenu);
+                userIntent.putExtra("MenuIndex",MenuIndex);
                 server_order_list.this.startActivity(userIntent);
                 //S.launchActivity("user_menu_list");
             }

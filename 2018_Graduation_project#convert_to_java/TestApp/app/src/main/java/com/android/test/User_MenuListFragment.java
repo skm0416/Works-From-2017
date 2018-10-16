@@ -47,7 +47,7 @@ public final class User_MenuListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.menu_fragment, container, false);
         final ListView listView = (ListView)rootView.findViewById(R.id.MenuListView);
-        listView.setAdapter(new MenuAdapter(passMenu));
+        listView.setAdapter(new User_MenuAdapter(passMenu));
         return rootView;
     }
     public User_MenuListFragment(){}

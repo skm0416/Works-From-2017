@@ -115,5 +115,20 @@ public final class DatabaseHelper extends SQLiteOpenHelper {
         return arraylist;
     }
 
+    public final String FindName(int rowid){
+        String returnname = new String();
+        SQLiteQueryBuilder sqb = new SQLiteQueryBuilder();
+        sqb.setTables(TableName);
+        String[] cols = new String[]{"RowId", "MenuName", "Price", "Image"};
+        String[] SelArg = new String[]{Integer.toString(rowid)};
+        Cursor cur = sqb.query(this.sqlObj, cols, "RowId like ?", SelArg, (String)null, (String)null, null);
+        if (cur.moveToFirst()) {
+            do {
+                returnname = cur.getString(cur.getColumnIndex("MenuName"));
+            } while(cur.moveToNext());
+        }
+        return returnname;
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package com.android.test;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -42,7 +43,7 @@ public final class MenuAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.menu_item, viewGroup, false);
         }
         convertView.setTag(String.valueOf(position));
-        MenuData Menu =MenuList.get(position);
+        final MenuData Menu =MenuList.get(position);
         ImageView MenuImage = (ImageView)convertView.findViewById(R.id.MenuImageView);
         TextView MenuName = (TextView)convertView.findViewById(R.id.MenuName);
         TextView MenuPrice = (TextView)convertView.findViewById(R.id.MenuPrice);
@@ -56,35 +57,6 @@ public final class MenuAdapter extends BaseAdapter {
         MenuNumber.setText((CharSequence)String.valueOf(Menu.getRowId()));
         MenuName.setText((CharSequence)Menu.getMenuName());
         MenuPrice.setText((CharSequence)(Menu.getPrice() + " 원"));
-
-        final ArrayList<Integer> MenuOrder = com.android.test.MenuOrder.getInstance().getMenuOrder();
-        final TextView menuamount = (TextView) convertView.findViewById(R.id.MenuAmount);
-        TextView menuplus = (TextView) convertView.findViewById(R.id.MenuPlus);
-        TextView menuminus = (TextView) convertView.findViewById(R.id.MenuMinus);
-
-        final int id = Integer.parseInt(MenuNumber.getText().toString())-1;
-        menuplus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int amount = MenuOrder.get(id);
-                amount = amount+1;
-                MenuOrder.set(id,amount);
-                com.android.test.MenuOrder.getInstance().setMenuOrder(MenuOrder);
-                menuamount.setText(String.valueOf(amount));
-            }
-        });
-        menuminus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int amount = MenuOrder.get(id);
-                if(amount > 0){
-                    amount = amount -1;
-                    MenuOrder.set(id,amount);
-                    menuamount.setText(String.valueOf(amount));
-                    com.android.test.MenuOrder.getInstance().setMenuOrder(MenuOrder);
-                }
-            }
-        });
         return convertView;
     }
 }

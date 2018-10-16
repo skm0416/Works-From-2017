@@ -92,6 +92,7 @@ public final class user_menu_list extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_user_menu_list);
+        setResult(RESULT_OK);
 
         Intent intent = getIntent();
         curtab = 0;
@@ -111,10 +112,12 @@ public final class user_menu_list extends Activity {
         }
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        Fragment nowfrag = (Fragment)fragArray.get(curtab);
-        transaction.setTransition(FragmentTransaction.TRANSIT_NONE).show(nowfrag).commit();
-        setPage(this);
+        if(fragArray.size()>0){
+            Fragment nowfrag = (Fragment)fragArray.get(curtab);
+            transaction.setTransition(FragmentTransaction.TRANSIT_NONE).show(nowfrag).commit();
+            setPage(this);
 
+        }
         TextView order = (TextView)this.findViewById(R.id.calculate_order);
         order.setOnClickListener((View.OnClickListener)(new View.OnClickListener() {
             public final void onClick(View it) {
